@@ -1,0 +1,11 @@
+{
+    "name": "tiago/cadastro-clientes",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Tiago",
+            "email": "tiago.farias.poa@gmail.com"
+        }
+    ],
+    "require": {}
+}
