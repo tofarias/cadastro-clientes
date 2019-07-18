@@ -7,5 +7,12 @@
             "email": "tiago.farias.poa@gmail.com"
         }
     ],
-    "require": {}
+    "autoload": {
+    	"psr-0":{
+    		"": "src/"
+    	}
+    },
+    "require": {
+        "vlucas/phpdotenv": "^3.4"
+    }
 }
