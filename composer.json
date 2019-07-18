@@ -13,6 +13,7 @@
     	}
     },
     "require": {
-        "vlucas/phpdotenv": "^3.4"
+        "vlucas/phpdotenv": "^3.4",
+        "illuminate/database": "^5.8"
     }
 }
