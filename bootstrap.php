@@ -14,11 +14,11 @@ $dotenv->load();
 $capsule = new Capsule;
 
 $capsule->addConnection([
-   "driver" => "mysql",
-   "host" =>"127.0.0.1",
-   "database" => getenv('DB_NAME'),
-   "username" => getenv('DB_USER'),
-   "password" => getenv('DB_PASSWORD')
+   "driver"     => getenv('DRIVER'),
+   "host"       => getenv('HOST'),
+   "database"   => getenv('DB_NAME'),
+   "username"   => getenv('DB_USER'),
+   "password"   => getenv('DB_PASSWORD')
 ]);
 
 //Make this Capsule instance available globally.

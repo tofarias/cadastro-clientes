@@ -24,8 +24,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id_user` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(12) NOT NULL,
-  `active` TINYINT NOT NULL DEFAULT 0,
+  `password` varchar(100) NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '0',
+  `updated_at` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id_user`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -38,7 +40,7 @@ CREATE UNIQUE INDEX `email_UNIQUE` ON `user` (`email` ASC);
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `cad_clientes`;
-INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `active`) VALUES (1, 'admin', 'admin@email.com', '123654789', 1);
+INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `active`, `updated_at`, `created_at`) VALUES (1, 'admin', 'admin@email.com', '$2y$10$WFCTyeJm11fPYi0Ln0fYH.w2U6bio3/FPVM/qxaqWUef9rHEGfSB6', 1, now(), now());
 
 COMMIT;
 

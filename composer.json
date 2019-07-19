@@ -9,8 +9,11 @@
     ],
     "autoload": {
     	"psr-0":{
-    		"": "src/"
-    	}
+    		"App/": "src/"
+    	},
+        "classmap": [    
+            "src/classes"
+        ]
     },
     "require": {
         "vlucas/phpdotenv": "^3.4",
