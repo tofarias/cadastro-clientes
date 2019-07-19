@@ -20,27 +20,51 @@ USE `cad_clientes` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `cad_clientes`.`user` (
+  `id_user` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `active` tinyint(4) NOT NULL DEFAULT '0',
-  `updated_at` datetime DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_user`))
+  `password` VARCHAR(100) NOT NULL,
+  `active` TINYINT(4) NOT NULL DEFAULT '0',
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id_user`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
-CREATE UNIQUE INDEX `email_UNIQUE` ON `user` (`email` ASC);
-
+CREATE TABLE IF NOT EXISTS `cad_clientes`.`client` (
+  `id_client` INT NOT NULL,
+  `id_user` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `phone` VARCHAR(45) NULL,
+  `cpf_cnpj` VARCHAR(45) NULL,
+  `nr_matricula` VARCHAR(45) NULL,
+  `updated_at` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id_client`),
+  INDEX `fk_client_user_idx` (`id_user` ASC),
+  UNIQUE INDEX `id_user_UNIQUE` (`id_user` ASC),
+  UNIQUE INDEX `cpf_cnpj_UNIQUE` (`cpf_cnpj` ASC),
+  CONSTRAINT `fk_client_user`
+    FOREIGN KEY (`id_user`)
+    REFERENCES `cad_clientes`.`user` (`id_user`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `cad_clientes`;
-INSERT INTO `user` (`id_user`, `name`, `email`, `password`, `active`, `updated_at`, `created_at`) VALUES (1, 'admin', 'admin@email.com', '$2y$10$WFCTyeJm11fPYi0Ln0fYH.w2U6bio3/FPVM/qxaqWUef9rHEGfSB6', 1, now(), now());
+
+INSERT INTO `cad_clientes`.`user` (`id_user`, `email`, `password`, `active`, `updated_at`, `created_at`) VALUES (1, 'admin@email.com', '$2y$10$WFCTyeJm11fPYi0Ln0fYH.w2U6bio3/FPVM/qxaqWUef9rHEGfSB6', 1, now(), now());
+INSERT INTO `cad_clientes`.`user` (`id_user`, `email`, `password`, `active`, `updated_at`, `created_at`) VALUES (2, 'cliente2@email.com', '$2y$10$WFCTyeJm11fPYi0Ln0fYH.w2U6bio3/FPVM/qxaqWUef9rHEGfSB6', 1, now(), now());
+INSERT INTO `cad_clientes`.`user` (`id_user`, `email`, `password`, `active`, `updated_at`, `created_at`) VALUES (3, 'cliente3@email.com', '$2y$10$WFCTyeJm11fPYi0Ln0fYH.w2U6bio3/FPVM/qxaqWUef9rHEGfSB6', 1, now(), now());
+
+INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `updated_at`, `created_at`) VALUES (1, 2, 'cliente 01', '321456987', '654753951', '222333555', now(), now());
+INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `updated_at`, `created_at`) VALUES (2, 3, 'cliente 02', '321698745', '659514753', '225523335', now(), now());
 
 COMMIT;
 
