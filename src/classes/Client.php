@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class User extends Eloquent
+class Client extends Eloquent
 {
-    protected $primaryKey = 'id_user';
-    protected $table = "user";
+    protected $primaryKey = 'id_client';
+    protected $table = "client";
    /**
    * The attributes that are mass assignable.
    *
@@ -32,10 +32,9 @@ class User extends Eloquent
    * Get Todo of User
    *
    */
-
-   public function client()
-   {
-       return $this->hasOne(\App\Client::class, 'id_user');
-   }
+  public function user()
+  {
+      return $this->belongsTo(User::class, 'id_user');
+  }
 
  }

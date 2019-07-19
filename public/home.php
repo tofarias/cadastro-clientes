@@ -251,6 +251,17 @@ $(document).ready(function(){
 });
 </script>
 
+<?php
+
+    echo '<pre>';
+    $user = \App\User::where('id_user', $_SESSION['user']->id_user )->first();
+    print_r( $user->client()->get() );
+    die;
+    echo '</pre>';
+
+    $clients = $_SESSION['user']->with('client')->get();
+?>
+
 <div class="container">
         <div class="table-wrapper">
             <div class="table-title">
@@ -273,14 +284,20 @@ $(document).ready(function(){
 								<label for="selectAll"></label>
 							</span>
 						</th>
-                        <th>Name</th>
+                        <th>Nome</th>
                         <th>Email</th>
-						<th>Address</th>
-                        <th>Phone</th>
+						<th>Telefone</th>
+                        <th>CPF</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($variable as $key => $value) : ?>
+                        
+                    
+                    <?php endforeach; ?>
+                    <tr>
+                    </tr>
                     <tr>
 						<td>
 							<span class="custom-checkbox">
