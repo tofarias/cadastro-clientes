@@ -11,12 +11,16 @@
     	"psr-0":{
     		"App/": "src/"
     	},
-        "classmap": [    
+        "classmap": [
             "src/classes"
         ]
     },
     "require": {
         "vlucas/phpdotenv": "^3.4",
         "illuminate/database": "^5.8"
+
+    },
+    "require-dev": {
+
     }
 }

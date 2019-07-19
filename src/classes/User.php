@@ -25,17 +25,21 @@ class User extends Eloquent
    */
 
    protected $hidden = [
-       'password', 'remember_token'
+       'password'
    ];
 
-   /*
-   * Get Todo of User
-   *
-   */
+   public function isAdmin() : bool
+   {
+       return $this->is_admin;
+   }
+
+   public function isActive() : Bool
+   {
+       return $this->active;
+   }
 
    public function client()
    {
        return $this->hasOne(\App\Client::class, 'id_user');
    }
-
  }
