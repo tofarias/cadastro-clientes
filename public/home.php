@@ -1,5 +1,42 @@
 <?php require_once 'partials/header.php'; ?>
 
+<?php
+	use Illuminate\Database\Capsule\Manager as Capsule;
+	use \App\Client as Client;
+	use \App\User as User;
+
+	if( isset($_POST['form-action']) )
+	{
+		if( $_POST['form-action'] == 'client-delete' )
+		{
+			try {
+
+				Capsule::beginTransaction();
+			
+				foreach ($_POST['clients'] as $key => $idClient) {
+
+					$client = Client::find($idClient);
+
+					if( $client instanceof Client ){
+
+						$user = $client->user;
+						$user->client()->delete();
+						$user->delete();
+					}
+				}
+			
+				Capsule::commit();
+			
+			} catch (\Exception $e){
+				print_r( $e->getMessage() );
+				Capsule::rollback();
+			}
+		}
+	}
+
+
+?>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -225,31 +262,7 @@
 		font-weight: normal;
 	}
 </style>
-<script type="text/javascript">
-$(document).ready(function(){
-	// Activate tooltip
-	$('[data-toggle="tooltip"]').tooltip();
 
-	// Select/Deselect checkboxes
-	var checkbox = $('table tbody input[type="checkbox"]');
-	$("#selectAll").click(function(){
-		if(this.checked){
-			checkbox.each(function(){
-				this.checked = true;
-			});
-		} else{
-			checkbox.each(function(){
-				this.checked = false;
-			});
-		}
-	});
-	checkbox.click(function(){
-		if(!this.checked){
-			$("#selectAll").prop("checked", false);
-		}
-	});
-});
-</script>
 
 <div class="container">
         <div class="table-wrapper">
@@ -260,7 +273,7 @@ $(document).ready(function(){
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Cliente</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Remover</span></a>
+						<a href="#deleteEmployeeModal" onclick="return deleteCheckSelectedClient(this);" class="btn btn-danger" data-toggle="modal" data-backdrop="static"><i class="material-icons">&#xE15C;</i> <span>Remover</span></a>
 					</div>
                 </div>
             </div>
@@ -348,7 +361,7 @@ $(document).ready(function(){
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form id="form-delete" onsubmit="deleteAppendClients(this);" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 					<div class="modal-header">
 						<h4 class="modal-title">Delete Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -360,10 +373,12 @@ $(document).ready(function(){
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-danger" value="Delete">
+						<input type="hidden" name="form-action" value="client-delete"/>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 
+	
 <?php include_once 'partials/footer.php'; ?>

@@ -7,22 +7,6 @@
   if( !Auth::check() ){
     header('location:login.php');
   }
-
-  // if( Auth::check() )
-  // {
-  //   if( Auth::user()->isAdmin() )
-  //   {
-  //     echo '<pre>';
-  //     print_r(  \App\Client::all()->toArray() );
-  //     echo '</pre>';
-  //   }else
-  //   {
-  //     echo '<pre>';
-  //     print_r(  Auth::user()->with('client')->where('id_user',Auth::user()->id_user)->get()->toArray() );
-  //     echo '</pre>';
-  //   }
-
-  // }
 ?>
 
 <!DOCTYPE html>

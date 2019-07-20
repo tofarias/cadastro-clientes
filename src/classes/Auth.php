@@ -7,15 +7,23 @@ use \App\User as User;
 
 class Auth
 {
+    public function __construct()
+    {
+        
+    }
     public static function check() : Bool
     {
+        if (session_status() !== PHP_SESSION_ACTIVE || session_id() === ""){
+            session_start(); 
+        }
+        
         if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
         {
             $email = trim($_POST['email']);
             $passwd = trim($_POST['passwd']);
             
             $user = User::where('key', $email)->first();
-            if( password_verify($passwd, $user->password) )
+            if( !is_null($user) && password_verify($passwd, $user->password) )
             {
                 $_SESSION['user'] = $user;
             }
