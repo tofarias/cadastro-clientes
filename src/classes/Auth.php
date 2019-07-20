@@ -9,24 +9,22 @@ class Auth
 {
     public static function check() : Bool
     {
-        $email = trim($_POST['email']);
-        $passwd = trim($_POST['passwd']);
-
-        if( isset( $email )  && isset( $passwd ) )
+        if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
         {
-            $user = User::where('email', $_POST['email'])->first();
-
-            if( password_verify($_POST['passwd'], $user->password) )
+            $email = trim($_POST['email']);
+            $passwd = trim($_POST['passwd']);
+            
+            $user = User::where('key', $email)->first();
+            if( password_verify($passwd, $user->password) )
             {
-                $_SESSION['user'] = User::where('email', $_POST['email'])->first();
+                $_SESSION['user'] = $user;
             }
         }
 
-        if( !isset($_SESSION['user']) )
+        if( !isset($_SESSION['user']) || (!$_SESSION['user'] instanceof User)  )
         {
             unset($_SESSION['user']);
             return false;
-            //header('location:login.php');
         }
 
         return true;
