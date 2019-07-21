@@ -1,8 +1,8 @@
 <?php 
+    session_start(); 
 
-    if( isset($_SESSION['user']) ){
-        unset($_SESSION['user']);
-    }
+    include '../vendor/autoload.php';
+    \App\Auth::logout();
 ?>
 
 <!DOCTYPE html>

@@ -29,17 +29,24 @@ class Auth
             }
         }
 
-        if( !isset($_SESSION['user']) || (!$_SESSION['user'] instanceof User)  )
+        if( isset($_SESSION['user']) && ($_SESSION['user'] instanceof User)  )
         {
-            unset($_SESSION['user']);
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public static function user() :? User
     {
         return $_SESSION['user'] ?? $_SESSION['user'];
+    }
+
+    public function logout()
+    {
+        if( isset($_SESSION['user']) )
+        {
+            unset($_SESSION['user']);
+        }
     }
 }

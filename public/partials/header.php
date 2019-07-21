@@ -1,5 +1,6 @@
-<? session_start(); ?>
+
 <?php require_once __DIR__.'/../../bootstrap.php'; ?>
+<?php session_start(); ?>
 <?php
 
   use \App\Auth as Auth;
