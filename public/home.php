@@ -339,7 +339,7 @@
             </div>
 
 			<?php if( App\Auth::user()->isAdmin() ) : ?>
-				<?php require_once('partials/cliens_list.php'); ?>
+				<?php require_once('partials/clients_list.php'); ?>
 			<?php else :?>
 				TESTE
 			<?php endif; ?>
