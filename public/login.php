@@ -45,7 +45,7 @@
                 <div class="col-sm-12">      
                     <div class="login-form">
 
-                        <form action="home.php" method="post" autocomplete="off">
+                        <form action="index.php" method="post" autocomplete="off">
                             <h2 class="text-center">Acesso Restrito</h2>       
                             <div class="form-group">
                                 <input autocomplete="off" autofocus type="text" name="email" class="form-control" placeholder="cpf" required="required">
