@@ -33,7 +33,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">[...]</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -54,8 +54,8 @@
                   </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-                  <li><a href="../navbar-static-top/">Static top</a></li>
+                  <li class="active"><a href="#">Default <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">Static top</a></li>
                   <li><a href="../login.php">Sair</a></li>
                 </ul>
               </div><!--/.nav-collapse -->

@@ -4,6 +4,7 @@
 	use Illuminate\Database\Capsule\Manager as Capsule;
 	use \App\Client as Client;
 	use \App\User as User;
+	use \App\Auth as Auth;
 
 	if( isset($_POST['form-action']) )
 	{
@@ -329,11 +330,15 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
+						<?php if ( Auth::user()->isAdmin() ) : ?>
 						<h2>Gerenciar <b>Clientes</b></h2>
+						<?php endif; ?>
 					</div>
 					<div class="col-sm-6">
+						<?php if ( Auth::user()->isAdmin() ) : ?>
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Adicionar Cliente</span></a>
 						<a href="#deleteEmployeeModal" onclick="return deleteCheckSelectedClient(this);" class="btn btn-danger" data-toggle="modal" data-backdrop="static"><i class="material-icons">&#xE15C;</i> <span>Remover</span></a>
+						<?php endif; ?>
 					</div>
                 </div>
             </div>
