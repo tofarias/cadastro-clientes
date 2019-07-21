@@ -48,7 +48,7 @@
                         <form action="home.php" method="post" autocomplete="off">
                             <h2 class="text-center">Acesso Restrito</h2>       
                             <div class="form-group">
-                                <input autocomplete="off" type="text" name="email" class="form-control" placeholder="cpf" required="required">
+                                <input autocomplete="off" autofocus type="text" name="email" class="form-control" placeholder="cpf" required="required">
                             </div>
                             <div class="form-group">
                                 <input type="password" name="passwd" class="form-control" placeholder="senha" required="required">

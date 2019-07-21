@@ -36,7 +36,7 @@
             <td><?=$client->user->isActive() ? 'Não' : 'Sim' ?></td>
             <td>
                 <a href="#editEmployeeModal<?=$client->id_client?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" onclick="return deleteCheckSelectedClient(this);" data-backdrop="static" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                <!-- <a href="#deleteEmployeeModal" onclick="return deleteClientByRowSelected(this);" data-backdrop="static" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
             </td>
         </tr>
 
