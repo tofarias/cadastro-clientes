@@ -6,6 +6,22 @@
 
         <script>
 
+            Dropzone.options.myAwesomeDropzone = {
+            init: function () {
+                    this.on("complete", function (file) {
+                    if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                        window.location.href = "upload.php";
+                    }
+                    });
+                }
+            };
+
+            function submitDelete(el)
+            {
+
+                $(el).parent().submit();
+            }
+
             function deleteAppendClients(el)
             {
                 var $chks = $('table#client-list').find(':checkbox.chk-client:checked').clone();
