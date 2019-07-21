@@ -31,6 +31,66 @@
 				print_r( $e->getMessage() );
 				Capsule::rollback();
 			}
+		}elseif( $_POST['form-action'] == 'client-add' )
+		{
+			try {
+
+				Capsule::beginTransaction();
+
+				$user = User::create([
+					'key' => $_POST['key'], 
+					'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
+				]);
+				$xyz = $user->client()->create([
+					'name' => $_POST['name'],
+					'phone' => $_POST['phone'],
+					'nr_matricula' => $_POST['nr_matricula'],
+					'nr_turma' => $_POST['nr_turma'],
+					'email' => $_POST['email'],
+					'cpf_cnpj' => $_POST['key'],
+				]);
+			
+				Capsule::commit();
+			
+			} catch (\Exception $e){
+				print_r( $e->getMessage() );
+				Capsule::rollback();
+			}
+		}elseif( $_POST['form-action'] == 'client-update' )
+		{
+			try {
+
+				Capsule::beginTransaction();
+
+				$client = Client::find( $_POST['id_client'] );
+
+				Client::where('id_client', $_POST['id_client'])->update([
+					'name' => $_POST['name'],
+					'phone' => $_POST['phone'],
+					'nr_matricula' => $_POST['nr_matricula'],
+					'nr_turma' => $_POST['nr_turma'],
+					'email' => $_POST['email'],
+					'cpf_cnpj' => $_POST['key']
+				]);
+
+				$userData = [
+					'key' => $_POST['key']
+				];
+
+				if( !empty($_POST['password']) ){
+					$password = trim($_POST['password']);
+					$user['password'] = password_hash ( $password , PASSWORD_BCRYPT );
+				}
+				
+
+				$client->user()->update( $userData );
+			
+				Capsule::commit();
+			
+			} catch (\Exception $e){
+				print_r( $e->getMessage() );
+				Capsule::rollback();
+			}
 		}
 	}
 
@@ -281,7 +341,7 @@
 			<?php if( App\Auth::user()->isAdmin() ) : ?>
 				<?php require_once('partials/cliens_list.php'); ?>
 			<?php else :?>
-				<?php require_once('partials/cliens_list.php'); ?>
+				TESTE
 			<?php endif; ?>
 
 
@@ -291,72 +351,51 @@
 	<div id="addEmployeeModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form id="form-add" onsubmit="" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
 					<div class="modal-header">
 						<h4 class="modal-title">Adicionar Cliente</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Name</label>
-							<input type="text" class="form-control" required>
+							<label>Nome</label>
+							<input name="name" autofocus type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<input name="email" type="email" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Senha</label>
+							<input name="password" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>CPF</label>
-							<textarea class="form-control" required></textarea>
+							<input name="key" type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Telefone</label>
-							<input type="text" class="form-control" required>
+							<input name="phone" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Matricula</label>
+							<input name="nr_matricula" type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Turma</label>
+							<input name="nr_turma" type="text" class="form-control" required>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 						<input type="submit" class="btn btn-success" value="Add">
+						<input type="hidden" name="form-action" value="client-add">
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">
-						<h4 class="modal-title">Editar Cliente</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label>Nome</label>
-							<input type="text" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
-						</div>
-						<div class="form-group">
-							<label>CPF / CNPJ</label>
-							<textarea class="form-control" required></textarea>
-						</div>
-						<div class="form-group">
-							<label>Telefone</label>
-							<input type="text" class="form-control" required>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Salvar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	
 	<!-- Delete Modal HTML -->
 	<div id="deleteEmployeeModal" class="modal fade">
 		<div class="modal-dialog">

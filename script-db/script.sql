@@ -36,8 +36,8 @@ AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `cad_clientes`.`client` (
-  `id_client` INT NOT NULL,
-  `id_user` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_client` INT NOT NULL AUTO_INCREMENT, 
+  `id_user` INT(11) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(45) NULL,  
   `nr_matricula` VARCHAR(45) NULL,
@@ -63,9 +63,9 @@ ENGINE = InnoDB;
 START TRANSACTION;
 USE `cad_clientes`;
 
-INSERT INTO `cad_clientes`.`user` (`id_user`, `key`, `email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (1, '12345678901', 'admin@email.com', '$2y$10$o174pfUoHaAtqtE82E/o..sM2FSY065D4LdMpyHHsdiJPMJ9.F1A6', 1, now(), now(), 1);
-INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (2, '95175385246','', '$2y$10$o174pfUoHaAtqtE82E/o..sM2FSY065D4LdMpyHHsdiJPMJ9.F1A6', 1, now(), now(), 0);
-INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (3, '35774136985','', '$2y$10$o174pfUoHaAtqtE82E/o..sM2FSY065D4LdMpyHHsdiJPMJ9.F1A6', 1, now(), now(), 0);
+INSERT INTO `cad_clientes`.`user` (`id_user`, `key`, `email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (1, '12345678901', 'admin@email.com', '$2y$10$hjnlZQf6CnAN7oKXteixiOdZKAMKbr.4XuTiUn2mh4SD7YQKBCUte', 1, now(), now(), 1);
+INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (2, '95175385246','', '$2y$10$hjnlZQf6CnAN7oKXteixiOdZKAMKbr.4XuTiUn2mh4SD7YQKBCUte', 1, now(), now(), 0);
+INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (3, '35774136985','', '$2y$10$hjnlZQf6CnAN7oKXteixiOdZKAMKbr.4XuTiUn2mh4SD7YQKBCUte', 1, now(), now(), 0);
 
 INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (1, 2, 'cliente 02', '321456987', '654753951', '222333555', '951', 'cliente2@email.com',now(), now());
 INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (2, 3, 'cliente 03', '321698745', '659514753', '225523335', '321','cliente3@email.com',now(), now());

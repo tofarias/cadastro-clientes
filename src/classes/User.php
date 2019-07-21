@@ -15,7 +15,7 @@ class User extends Eloquent
    */
 
    protected $fillable = [
-       'name', 'email', 'password'
+       'name', 'email', 'password', 'key'
    ];
 
    /**
@@ -30,7 +30,7 @@ class User extends Eloquent
 
    public function isAdmin() : bool
    {
-       return $this->is_admin;
+       return $this->is_admin == 1;
    }
 
    public function isActive() : Bool

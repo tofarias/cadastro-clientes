@@ -12,13 +12,13 @@
             <th>CPF</th>
             <th>Telefone</th>
             <th>Matricula</th>
+            <th>Turma</th>
             <th>Bloqueado</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <?php $clients = \App\Client::all() ?>
-        <?php /*echo '<pre>'; print_r($clients); echo '</pre>';*/ ?>
         <?php foreach ($clients as $key => $client) : ?>
         <tr>
             <td>
@@ -28,16 +28,70 @@
                 </span>
             </td>
             <td><?=$client->name?></td>
-            <td><?=$client->user->email?></td>
+            <td><?=$client->email?></td>
             <td><?=$client->cpf_cnpj?></td>
             <td><?=$client->phone?></td>
+            <td><?=$client->nr_matricula?></td>
             <td><?=$client->nr_turma?></td>
-            <td><?= $client->user->isActive() ? 'Não' : 'Sim' ?></td>
+            <td><?=$client->user->isActive() ? 'Não' : 'Sim' ?></td>
             <td>
-                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="#editEmployeeModal<?=$client->id_client?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                 <a href="#deleteEmployeeModal" onclick="return deleteCheckSelectedClient(this);" data-backdrop="static" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
             </td>
         </tr>
+
+        <!-- Edit Modal HTML -->
+        <div id="editEmployeeModal<?=$client->id_client?>" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <form id="form-add" onsubmit="" method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+                        <input type="hidden" name="id_client" value="<?=$client->id_client?>"/>
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">Editar Cliente <?=$client->id_client?></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input name="name" value="<?=$client->name?>" autofocus type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input name="email" value="<?=$client->email?>"  type="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha</label>
+                                <input name="password" value=""  type="password" placeholder="************" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>CPF</label>
+                                <input name="key" value="<?=$client->cpf_cnpj?>" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <input name="phone" value="<?=$client->phone?>" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Matricula</label>
+                                <input name="nr_matricula" value="<?=$client->nr_matricula?>" type="text" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Turma</label>
+                                <input name="nr_turma" value="<?=$client->nr_turma?>" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="hidden" name="form-action" value="client-update">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <?php endforeach; ?>
     </tbody>
 </table>

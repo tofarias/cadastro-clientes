@@ -22,7 +22,7 @@ class Auth
             $email = trim($_POST['email']);
             $passwd = trim($_POST['passwd']);
             
-            $user = User::where('key', $email)->first();
+            $user = User::where('key', $email)->first();            
             if( !is_null($user) && password_verify($passwd, $user->password) )
             {
                 $_SESSION['user'] = $user;

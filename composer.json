@@ -13,6 +13,9 @@
     	},
         "classmap": [
             "src/classes"
+        ],
+        "files": [
+            "src/helpers.php"
         ]
     },
     "require": {
