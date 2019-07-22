@@ -27,7 +27,6 @@
                 var $chks = $('table#client-list').find(':checkbox.chk-client:checked').clone();
                 
                 $(el).append( $chks.css('display', 'none') );
-                //$(el).append( $('<input type="hidden" name="form-action" value="client-delete"/>');
             }
 
             function deleteCheckSelectedClient(el)

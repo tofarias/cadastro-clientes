@@ -3,7 +3,7 @@
         <table class="table table-striped table-hover" id="client-list">
         <thead>
             <tr>
-                <th>Arquivo</th>
+                <th><b>Nome do Arquivo</b></th>
                 <?php if ( \App\Auth::user()->isAdmin() ) : ?>
                 <th style="text-align:center">Ação</th>
                 <?php endif; ?>

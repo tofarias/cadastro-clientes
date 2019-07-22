@@ -15,23 +15,28 @@ class Auth
     {
         if (session_status() !== PHP_SESSION_ACTIVE || session_id() === ""){
             session_start(); 
-        }
-        
-        if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
-        {
-            $email = trim($_POST['email']);
-            $passwd = trim($_POST['passwd']);
-            
-            $user = User::where('key', $email)->first();            
-            if( !is_null($user) && password_verify($passwd, $user->password) )
-            {
-                $_SESSION['user'] = $user;
-            }
-        }
+        }        
 
         if( isset($_SESSION['user']) && ($_SESSION['user'] instanceof User)  )
         {
             return true;
+        }
+        else
+        {
+            if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
+            {
+                $email = trim($_POST['email']);
+                $passwd = trim($_POST['passwd']);
+                
+                $user = User::where('key', $email)->first();
+                
+                if( ($user instanceof User) && password_verify($passwd, $user->password) )
+                {
+                    $_SESSION['user'] = $user;
+                    unset($_SESSION['msg']);
+                    return true;
+                }
+            }
         }
 
         return false;

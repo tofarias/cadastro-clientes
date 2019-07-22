@@ -15,7 +15,7 @@ class User extends Eloquent
    */
 
    protected $fillable = [
-       'name', 'email', 'password', 'key'
+       'name', 'email', 'password', 'key', 'active'
    ];
 
    /**
@@ -35,7 +35,7 @@ class User extends Eloquent
 
    public function isActive() : Bool
    {
-       return $this->active;
+       return $this->active == 1;
    }
 
    public function client()

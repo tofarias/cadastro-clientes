@@ -29,7 +29,7 @@
 				Capsule::commit();
 			
 			} catch (\Exception $e){
-				print_r( $e->getMessage() );
+				$_SESSION['msg'] = $e->getMessage();
 				Capsule::rollback();
 			}
 		}elseif( $_POST['form-action'] == 'client-add' )
@@ -40,6 +40,7 @@
 
 				$user = User::create([
 					'key' => $_POST['key'], 
+					'active' => !isset($_POST['active']) ? 0 : 1, 
 					'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
 				]);
 				$xyz = $user->client()->create([
@@ -54,7 +55,7 @@
 				Capsule::commit();
 			
 			} catch (\Exception $e){
-				print_r( $e->getMessage() );
+				$_SESSION['msg'] = $e->getMessage();
 				Capsule::rollback();
 			}
 		}elseif( $_POST['form-action'] == 'client-update' )
@@ -75,12 +76,13 @@
 				]);
 
 				$userData = [
-					'key' => $_POST['key']
+					'key' => $_POST['key'],
+					'active' => !isset($_POST['active']) ? 0 : 1
 				];
 
 				if( !empty($_POST['password']) ){
 					$password = trim($_POST['password']);
-					$user['password'] = password_hash ( $password , PASSWORD_BCRYPT );
+					$userData['password'] = password_hash ( $_POST['password'] , PASSWORD_BCRYPT );
 				}
 				
 
@@ -89,7 +91,7 @@
 				Capsule::commit();
 			
 			} catch (\Exception $e){
-				print_r( $e->getMessage() );
+				$_SESSION['msg'] = $e->getMessage();
 				Capsule::rollback();
 			}
 		}
@@ -324,6 +326,12 @@
 	}
 </style>
 
+<?php if( isset($_SESSION['msg']) && !empty($_SESSION['msg']) ) : ?>
+	<div class="alert alert-danger">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Atenção!</strong> <?=$_SESSION['msg']?>.
+	</div>
+<?php endif; ?>
 
 <div class="container">
         <div class="table-wrapper">
@@ -392,10 +400,14 @@
 							<label>Turma</label>
 							<input name="nr_turma" type="text" class="form-control" required>
 						</div>
+						<div class="form-group">
+							<label>Ativo</label>
+							<input type="checkbox" name="active" value="1" checked="checked"/>
+						</div>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-success" value="Add">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-success" value="Salvar">
 						<input type="hidden" name="form-action" value="client-add">
 					</div>
 				</form>

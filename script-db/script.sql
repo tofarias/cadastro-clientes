@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `cad_clientes`.`client` (
   INDEX `fk_client_user_idx` (`id_user` ASC),
   UNIQUE INDEX `id_user_UNIQUE` (`id_user` ASC),
   UNIQUE INDEX `cpf_cnpj_UNIQUE` (`cpf_cnpj` ASC),
+  UNIQUE INDEX `nr_matricula_UNIQUE` (`nr_matricula` ASC),
   CONSTRAINT `fk_client_user`
     FOREIGN KEY (`id_user`)
     REFERENCES `cad_clientes`.`user` (`id_user`)

@@ -80,10 +80,14 @@
                                 <label>Turma</label>
                                 <input name="nr_turma" value="<?=$client->nr_turma?>" type="text" class="form-control" required>
                             </div>
+                            <div class="form-group">
+                                <label>Ativo</label>
+                                <input type="checkbox" name="active" <?=$client->user->isActive() == 1 ? 'checked=checked' : ''?> value="1"/>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Add">
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                            <input type="submit" class="btn btn-success" value="Salvar">
                             <input type="hidden" name="form-action" value="client-update">
                         </div>
                     </form>
