@@ -67,8 +67,8 @@ INSERT INTO `cad_clientes`.`user` (`id_user`, `key`, `email`, `password`, `activ
 INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (2, '95175385246','', '$2y$10$hjnlZQf6CnAN7oKXteixiOdZKAMKbr.4XuTiUn2mh4SD7YQKBCUte', 1, now(), now(), 0);
 INSERT INTO `cad_clientes`.`user` (`id_user`, `key`,`email`, `password`, `active`, `updated_at`, `created_at`,`is_admin`) VALUES (3, '35774136985','', '$2y$10$hjnlZQf6CnAN7oKXteixiOdZKAMKbr.4XuTiUn2mh4SD7YQKBCUte', 1, now(), now(), 0);
 
-INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (1, 2, 'cliente 02', '321456987', '654753951', '222333555', '951', 'cliente2@email.com',now(), now());
-INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (2, 3, 'cliente 03', '321698745', '659514753', '225523335', '321','cliente3@email.com',now(), now());
+INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (1, 2, 'aluno 02', '321456987', '654753951', '222333555', '951', 'aluno2@email.com',now(), now());
+INSERT INTO `cad_clientes`.`client` (`id_client`, `id_user`, `name`, `phone`, `cpf_cnpj`, `nr_matricula`, `nr_turma`, `email`, `updated_at`, `created_at`) VALUES (2, 3, 'aluno 03', '321698745', '659514753', '225523335', '321','aluno3@email.com',now(), now());
 
 COMMIT;
 

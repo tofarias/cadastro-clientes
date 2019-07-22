@@ -95,7 +95,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-<div class="clearfix">
+<!-- <div class="clearfix">
     <div class="hint-text">Listando <b>5</b> de <b>25</b> registros</div>
     <ul class="pagination">
         <li class="page-item disabled"><a href="#">Anterior</a></li>
@@ -106,4 +106,4 @@
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item"><a href="#" class="page-link">Próximo</a></li>
     </ul>
-</div>
+</div> -->
