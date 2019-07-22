@@ -332,6 +332,8 @@
                     <div class="col-sm-6">
 						<?php if ( Auth::user()->isAdmin() ) : ?>
 						<h2>Gerenciar <b>Clientes</b></h2>
+						<?php else : ?>
+						<h2>Arquivos</h2>
 						<?php endif; ?>
 					</div>
 					<div class="col-sm-6">
@@ -346,7 +348,7 @@
 			<?php if( App\Auth::user()->isAdmin() ) : ?>
 				<?php require_once('partials/clients_list.php'); ?>
 			<?php else :?>
-				TESTE
+				<?php require_once('partials/files_list.php');?>
 			<?php endif; ?>
 
 
