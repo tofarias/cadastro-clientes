@@ -6,9 +6,9 @@
 use \App\Auth as Auth;
 
   if( !Auth::check() ){
-    $fm->error('Usuários/Senha incorretos!', 'login.php');
+    $_fm->error('Usuários/Senha incorretos!', 'login.php');
   }elseif( !Auth::user()->isActive() ){
-    $fm->error('Conta bloqueada!', 'login.php');
+    $_fm->error('Conta bloqueada!', 'login.php');
   }
 
 ?>

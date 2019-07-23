@@ -7,48 +7,44 @@ use \App\User as User;
 
 class Auth
 {
-    public function __construct()
-    {
+    private static $session;
 
+    public function __construct(Session $session)
+    {
+        self::$session = $session;
     }
 
     public static function check() : Bool
     {
-        if( isset($_SESSION['user']) && ($_SESSION['user'] instanceof User)  )
+        if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
         {
-            return true;
-        }
-        else
-        {
-            if( isset($_POST['email']) && isset( $_POST['passwd'] ) )
+            $email = trim($_POST['email']);
+            $passwd = trim($_POST['passwd']);
+
+            $user = User::where('key', $email)->first();
+
+            if( ($user instanceof User) && password_verify($passwd, $user->password) )
             {
-                $email = trim($_POST['email']);
-                $passwd = trim($_POST['passwd']);
-
-                $user = User::where('key', $email)->first();
-
-                if( ($user instanceof User) && password_verify($passwd, $user->password) )
-                {
-                    $_SESSION['user'] = $user;
-                    unset($_SESSION['msg']);
-                    return true;
-                }
+                self::$session::set('user', $user);
+                return true;
             }
         }
 
-        return false;
+        if( is_null( self::user() ) )
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public static function user() :? User
     {
-        return $_SESSION['user'] ?? $_SESSION['user'];
+        return self::$session::get('user') ?? null;
     }
 
     public static function logout()
     {
-        if( isset($_SESSION['user']) )
-        {
-            unset($_SESSION['user']);
-        }
+        self::$session::destroy();
     }
 }

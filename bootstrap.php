@@ -7,7 +7,6 @@
 
    use Pimple\Container;
 
-
    $container = new Container();
 
    $container['session'] = function($c){
@@ -27,7 +26,11 @@
    };
 
    $container['auth'] = function($c){
-      return new \App\Auth();
+      return new \App\Auth( $c['session'] );
+   };
+
+   $container['user'] = function($c){
+      return new \App\User();
    };
 
 
@@ -36,6 +39,7 @@
    $_dotenv  = $container['dotenv']->load();
    $_capsule = $container['capsule'];
    $_auth    = $container['auth'];
+   $_user    = $container['user'];
 
    $_capsule->addConnection([
       "driver"     => getenv('DRIVER'),
