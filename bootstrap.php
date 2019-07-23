@@ -3,21 +3,19 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-if( session_status() == PHP_SESSION_NONE ){
-   session_start();
-}
+include 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
+use \App\Session;
 
+$session = new Session();
 
-include 'vendor/autoload.php';
+$fm = new \Plasticbrain\FlashMessages\FlashMessages();
 
 $dotenv = \Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
-
 $capsule = new Capsule;
-
 $capsule->addConnection([
    "driver"     => getenv('DRIVER'),
    "host"       => getenv('HOST'),

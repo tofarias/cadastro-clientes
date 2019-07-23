@@ -6,8 +6,7 @@
 use \App\Auth as Auth;
 
   if( !Auth::check() ){
-    $_SESSION['msg'] = 'Usuários/Senha incorretos!';
-    header('location:login.php');
+    $fm->error('Usuários/Senha incorretos!', 'login.php');
   }
 
   if( !Auth::user()->isActive() ){

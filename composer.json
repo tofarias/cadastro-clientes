@@ -20,7 +20,8 @@
     },
     "require": {
         "vlucas/phpdotenv": "^3.4",
-        "illuminate/database": "^5.8"
+        "illuminate/database": "^5.8",
+        "plasticbrain/php-flash-messages": "^1.0"
 
     },
     "require-dev": {

@@ -44,7 +44,7 @@ class Auth
         return $_SESSION['user'] ?? $_SESSION['user'];
     }
 
-    public function logout()
+    public static function logout()
     {
         if( isset($_SESSION['user']) )
         {

@@ -1,8 +1,9 @@
-<?php 
-    session_start(); 
 
-    include '../vendor/autoload.php';
-    \App\Auth::logout();
+<?php
+    require __DIR__.'/../bootstrap.php';
+
+    use \App\Auth as Auth;
+    Auth::logout();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +32,7 @@
                 min-height: 38px;
                 border-radius: 2px;
             }
-            .btn {        
+            .btn {
                 font-size: 15px;
                 font-weight: bold;
             }
@@ -42,17 +43,15 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">      
+                <div class="col-sm-12">
                     <div class="login-form">
-                        
-                        <?php if( isset($_SESSION['msg']) && !empty($_SESSION['msg']) ) : ?>
-                            <div class="alert alert-danger">
-                                <strong>Atenção!</strong> <?=$_SESSION['msg']?>.
-                            </div>
+
+                        <?php if ($fm->hasErrors()) : ?>
+                        <?php $fm->display(); ?>
                         <?php endif; ?>
 
                         <form action="index.php" method="post" autocomplete="off">
-                            <h2 class="text-center">Acesso Restrito</h2>       
+                            <h2 class="text-center">Acesso Restrito</h2>
                             <div class="form-group">
                                 <input autocomplete="off" autofocus type="text" name="email" class="form-control" placeholder="cpf" required="required">
                             </div>
@@ -68,6 +67,6 @@
                 </div>
             </div>
         </div>
-        
+
     </body>
 </html>
