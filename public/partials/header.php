@@ -1,10 +1,10 @@
 
-<?php require_once __DIR__.'/../../bootstrap.php'; ?>
-<?php session_start(); ?>
+<?php require __DIR__.'/../../bootstrap.php'; ?>
+
 <?php
 
 use \App\Auth as Auth;
-  
+
   if( !Auth::check() ){
     $_SESSION['msg'] = 'Usuários/Senha incorretos!';
     header('location:login.php');
@@ -66,4 +66,4 @@ use \App\Auth as Auth;
                 </ul>
               </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
-          </nav>         
+          </nav>
