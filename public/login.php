@@ -2,8 +2,7 @@
 <?php
     require __DIR__.'/../bootstrap.php';
 
-    use \App\Auth as Auth;
-    Auth::logout();
+    $_auth::logout();
 ?>
 
 <!DOCTYPE html>

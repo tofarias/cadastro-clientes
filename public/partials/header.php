@@ -3,7 +3,7 @@
 
 <?php
 
-use \App\Auth as Auth;
+  use \App\Auth as Auth;
 
   if( !Auth::check() ){
     $_fm->error('Usuários/Senha incorretos!', 'login.php');
