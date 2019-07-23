@@ -46,9 +46,7 @@
                 <div class="col-sm-12">
                     <div class="login-form">
 
-                        <?php if ($fm->hasErrors()) : ?>
-                        <?php $fm->display(); ?>
-                        <?php endif; ?>
+                        <?php if ($fm->hasErrors()) $fm->display(); ?>
 
                         <form action="index.php" method="post" autocomplete="off">
                             <h2 class="text-center">Acesso Restrito</h2>
